@@ -1,2 +1,2 @@
-# django_dcode_app
+# Django Dcode App
 A Simple Syntax Highlighting App
