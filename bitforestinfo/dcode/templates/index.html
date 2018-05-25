@@ -1,0 +1,56 @@
+{% extends 'IndexBase.html' %}
+
+{% block body %}
+  <form action="/" method="post">
+    {% csrf_token %}
+    <div  class="text-center" style="width: auto;height: auto;padding: 5em;border-width: 5px;border-radius: 2px;">
+         
+    <div id="container">
+        <div id="main">
+            <div id="code">
+              <div id="code2">
+                <strong>Source code:</strong><br/>
+                <textarea name="code" rows="10" cols="40">{{ code }}</textarea>
+              </div>
+            </div>
+            <div id="html">
+              <div id="html2">
+                <strong>HTML:</strong><br/>
+                <textarea id="html" name="html" rows="10" cols="40" readonly="readonly" onClick="javascript:this.form.html.focus();this.form.html.select();">{{ html }}</textarea>
+              </div>
+            </div>
+        </div>
+      <div id="options">
+        <p>
+          Language:
+          <select name="lexer">
+            {% for im in lexers %}
+            <option {% if im == lexer %}selected="selected" {% endif %}value="{{ im }}">{{ im }}</option>
+            {% endfor %}
+
+          </select>
+          Style:
+          <select name="style">
+            {% for item in styles %}
+            <option {% if item == style %}selected="selected" {% endif %}value="{{ item }}">{{ item }}</option>
+            {% endfor %}
+          </select>
+          
+          <input type="submit" value="Highlight!"/>
+        </p>
+      </div>
+    </form>
+  </div>
+</div>
+      <div id="preview" style="width: 100%;">
+        <p>
+          <strong>Preview:</strong>
+        </p>
+        {% autoescape off %}
+          {{ html }}
+        {% endautoescape %}
+      
+     
+    </div>
+  
+{% endblock %}
